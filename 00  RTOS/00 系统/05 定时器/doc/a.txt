@@ -1,0 +1,10 @@
+Obj				用于存放编译产生的文件
+
+rtthread/3.0.3:
+bsp				存放板级支持包
+components		存放组件
+include 		存放头文件
+arm/cortex-m3	存放与处理器相关的节科文件
+src				存放内核源码
+
+User			main.c
