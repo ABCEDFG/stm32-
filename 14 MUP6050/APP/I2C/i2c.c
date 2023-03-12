@@ -1,7 +1,5 @@
 #include <i2c.h>
-#include <sysTick.h>
-
-
+#include <systick.h>
 
 void IIC_Init(void)
 {
@@ -11,7 +9,7 @@ void IIC_Init(void)
 	
 	GPIO_InitStructure.GPIO_Pin=IIC_SCL_PIN;
 	GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;  //开漏输出
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_Out_PP;
 	GPIO_Init(IIC_SCL_PORT,&GPIO_InitStructure);
 	
 	GPIO_InitStructure.GPIO_Pin=IIC_SDA_PIN;
@@ -21,9 +19,7 @@ void IIC_Init(void)
 	IIC_SDA=1;
 }
 
-
-/* 输出模式 */
-void SDA_OUT()	
+void SDA_OUT()	//输出模式
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
 	
@@ -33,9 +29,7 @@ void SDA_OUT()
 	GPIO_Init(IIC_SDA_PORT,&GPIO_InitStructure);
 }
 
-
-/* 输入模式 */
-void SDA_IN(void)	
+void SDA_IN(void)	//输入模式
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
 	
@@ -44,8 +38,7 @@ void SDA_IN(void)
 	GPIO_Init(IIC_SDA_PORT,&GPIO_InitStructure);
 }
 
-/* 起始信号 */
-void IIC_Start(void)	
+void IIC_Start(void)	//起始信号
 {
 	SDA_OUT();     //sda线输出
 	IIC_SDA=1;	  	  
@@ -56,9 +49,7 @@ void IIC_Start(void)
 	IIC_SCL=0;//钳住I2C总线，准备发送或接收数据 
 }
 
-
-/* 停止信号 */
-void IIC_Stop(void)	
+void IIC_Stop(void)	//停止信号
 {
 	SDA_OUT();//sda线输出
 	IIC_SCL=0;
@@ -69,12 +60,7 @@ void IIC_Stop(void)
 	delay_us(6);	//要求时间>4us							   	
 }
 
-
-/* 
-*  等待应答信号 
-*  返回 0 失败   1 成功 
-*/
-u8 IIC_Wait_Ack(void)	
+u8 IIC_Wait_Ack(void)	//等待应答信号 返回 0成功 1失败
 {
 	u8 tempTime=0;
 	
@@ -89,16 +75,14 @@ u8 IIC_Wait_Ack(void)
 		if(tempTime>250)	//等待应答的最大时间 超过则失败
 		{
 			IIC_Stop();
-			return 0;
+			return 1;
 		}
 	}
 	IIC_SCL=0;//时钟输出0 	   
-	return 1;  
+	return 0;  
 } 
 
-
-/* 产生应答 */
-void IIC_Ack(void)	
+void IIC_Ack(void)	//产生应答
 {
 	IIC_SCL=0;
 	SDA_OUT();
@@ -109,9 +93,7 @@ void IIC_Ack(void)
 	IIC_SCL=0;
 }
 
-
-/* 产生非应答 */
-void IIC_NAck(void)	
+void IIC_NAck(void)	//产生非应答
 {
 	IIC_SCL=0;
 	SDA_OUT();
@@ -122,9 +104,7 @@ void IIC_NAck(void)
 	IIC_SCL=0;
 }
 
-
-/* 发送一个字节 */
-void IIC_Send_Byte(u8 txd)	
+void IIC_Send_Byte(u8 txd)	//发送一个字节
 {                        
     u8 t;   
 	SDA_OUT(); 	    
@@ -148,13 +128,7 @@ void IIC_Send_Byte(u8 txd)
     }	 
 }
 
-
-/*  
-*   读取一个字节 
-*   ack=1  发送应答   
-*   ack=0  发送非应答 
-*/
-u8 IIC_Read_Byte(u8 ack)	
+u8 IIC_Read_Byte(u8 ack)	//读取一个字节 ack=1 发送应答   ack=0  发送非应答
 {
 	u8 i,receive=0;
 	SDA_IN();//SDA设置为输入
@@ -177,3 +151,4 @@ u8 IIC_Read_Byte(u8 ack)
 	}
 	return receive;
 }
+

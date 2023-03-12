@@ -2,6 +2,7 @@
 #include "system.h"
 #include "SysTick.h"
 #include "usart.h"   
+#include <I2C.h>
 
 
 //≥ı ºªØMPU6050

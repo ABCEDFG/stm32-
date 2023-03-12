@@ -4,19 +4,20 @@
 #include <system.h>
 
 /*  IIC_SCL时钟端口、引脚定义 */
-#define IIC_SCL_PORT 		GPIOA   
-#define IIC_SCL_PIN 		(GPIO_Pin_11)
-#define IIC_SCL_PORT_RCC	RCC_APB2Periph_GPIOA
+#define IIC_SCL_PORT 		GPIOB   
+#define IIC_SCL_PIN 		(GPIO_Pin_6)
+#define IIC_SCL_PORT_RCC	RCC_APB2Periph_GPIOB
 
 /*  IIC_SDA时钟端口、引脚定义 */
-#define IIC_SDA_PORT 		GPIOA  
-#define IIC_SDA_PIN 		(GPIO_Pin_12)
-#define IIC_SDA_PORT_RCC	RCC_APB2Periph_GPIOA
+#define IIC_SDA_PORT 		GPIOB  
+#define IIC_SDA_PIN 		(GPIO_Pin_7)
+#define IIC_SDA_PORT_RCC	RCC_APB2Periph_GPIOB
 
 //IO操作函数	 
-#define IIC_SCL    PAout(11) //SCL
-#define IIC_SDA    PAout(12) //输出 SDA	 
-#define READ_SDA   PAin(12)  //输入 SDA
+#define IIC_SCL    PBout(6) //SCL
+#define IIC_SDA    PBout(7) //输出 SDA	 
+#define READ_SDA   PBin(7)  //输入 SDA
+
 
 //IIC所有操作函数
 void IIC_Init(void);            //初始化IIC的IO口				 

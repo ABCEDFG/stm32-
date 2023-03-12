@@ -29,6 +29,7 @@ int main()
 		delay_ms(200);
 		LED2=!LED2;
 	}
+	printf("AAAAAAAAAAAAAAAA /r/n");
 	
 	while(1)
 	{
