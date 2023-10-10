@@ -7,9 +7,9 @@
 
 #define DEBUG_FLAG
 #ifdef  DEBUG_FLAG
-#define DEBBUG_PRINT(x, ...)  printf(x, ##__VA_ARGS__)
+#define DEBUG_PRINT(format, ...) printf("DEBUG: %s  %s  %d:  " format "\r\n",__FILE__, __func__, __LINE__, ##__VA_ARGS__)
 #else
-#define DEBBUG_PRINT(x, ...)
+#define DEBUG_PRINT(x, ...)
 #endif
 
 
